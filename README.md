@@ -15,8 +15,8 @@ A browser app that listens to your **microphone**, classifies the sound in real 
 **YAMNet** (Google's AudioSet-trained sound event model), and shows the result as a live
 confidence chart, an input-level alert banner, and a timestamped event log.
 
-- **Live demo:** <https://huggingface.co/spaces/seahli/SoundAnalysis>
-- **Source:** <https://github.com/seahli88-del/SoundAnalysis>
+- **Live demo:** <https://huggingface.co/spaces/seahli/SoundAnalysis1>
+- **Source:** <https://github.com/seahli88-del/SoundAnalysis1>
 
 ## What it does
 
@@ -43,7 +43,7 @@ known limitations.
 ## Run locally
 
 ```bash
-git clone https://github.com/seahli88-del/SoundAnalysis.git
+git clone https://github.com/seahli88-del/SoundAnalysis1.git
 cd SoundAnalysis
 python -m venv .venv
 .venv\Scripts\activate        # Windows
