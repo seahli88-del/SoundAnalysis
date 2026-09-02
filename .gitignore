@@ -1,0 +1,47 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Gradio / HF caches
+.gradio/
+flagged/
+gradio_cached_examples/
+*.hf_cache/
+
+# Model weight blobs / downloads
+*.pt
+*.pth
+*.onnx
+*.h5
+*.tflite
+*.tfhub_cache/
+tfhub_modules/
+
+# Logs / exports produced at runtime
+*.log
+exports/
+*.csv
+
+# Env / secrets
+.env
+*.env
+secrets.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
