@@ -60,7 +60,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           HF_USERNAME: seahli
-          HF_SPACE_NAME: SoundAnalysis
+          HF_SPACE_NAME: SoundAnalysis1
         run: |
           if [ -z "${HF_TOKEN}" ]; then
             echo "HF_TOKEN GitHub Actions secret is missing."
