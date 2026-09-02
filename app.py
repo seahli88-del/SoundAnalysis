@@ -23,6 +23,11 @@ import pandas as pd
 from src.audio_utils import prepare_chunk
 from src.yamnet_classifier import classify
 
+try:
+    import spaces
+except Exception:  # pragma: no cover - only used on Hugging Face runtime
+    spaces = None
+
 LOG_COLUMNS = ["time", "label", "confidence", "level_db", "alert"]
 
 HOW_IT_WORKS = """
@@ -72,6 +77,15 @@ def _render(state: dict, label_scores: dict | None, level_db: float | None, is_a
     return label_scores or {}, level_db, banner, df, _format_stats(state["log"])
 
 
+if spaces is not None:
+    @spaces.GPU
+    def run_inference(waveform):
+        return classify(waveform, top_k=5)
+else:
+    def run_inference(waveform):
+        return classify(waveform, top_k=5)
+
+
 def process_chunk(new_chunk, state, alert_threshold_db, min_confidence):
     """Gradio streaming callback: runs on every new microphone chunk."""
     state = state or _new_state()
@@ -82,7 +96,7 @@ def process_chunk(new_chunk, state, alert_threshold_db, min_confidence):
 
     sample_rate, raw_data = new_chunk
     waveform, level_db = prepare_chunk(sample_rate, raw_data)
-    predictions = classify(waveform, top_k=5)
+    predictions = run_inference(waveform)
 
     if not predictions:
         label_scores, level_db_out, banner, df, stats = _render(state, None, level_db, False)
