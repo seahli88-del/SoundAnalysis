@@ -16,7 +16,7 @@ A browser app that listens to your **microphone**, classifies the sound in real 
 confidence chart, an input-level alert banner, and a timestamped event log.
 
 - **Live demo:** <https://huggingface.co/spaces/seahli/SoundAnalysis1>
-- **Source:** <https://github.com/seahli88-del/SoundAnalysis1>
+- **Source:** <https://github.com/seahli88-del/SoundAnalysis>
 
 ## What it does
 
