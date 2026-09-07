@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Sound Classifier</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">∿</div>
+      <div>
+        <p class="eyebrow">BROWSER DSP LAB</p>
+        <h1>Live Sound Classifier</h1>
+      </div>
+      <div class="runtime-badge"><span class="status-dot"></span> Local analysis</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">MICROPHONE / REAL-TIME</p>
+        <h2>See the shape of sound.</h2>
+        <p class="hero-copy">A private, browser-only sound monitor. Audio never leaves this tab: the Web Audio API extracts frequency features locally and turns them into readable sound categories.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="recordButton" class="primary-button" type="button">Start listening</button>
+        <button id="resetButton" class="ghost-button" type="button">Reset session</button>
+      </div>
+    </section>
+
+    <div id="errorBox" class="error-box" role="alert" hidden></div>
+
+    <section class="dashboard-grid" aria-live="polite">
+      <article class="panel signal-panel">
+        <div class="panel-heading"><div><p class="eyebrow">SIGNAL PROFILE</p><h3>Frequency energy</h3></div><span id="frequencyReadout" class="mono">-- Hz</span></div>
+        <canvas id="spectrumCanvas" width="900" height="260" aria-label="Live frequency spectrum"></canvas>
+        <div class="spectrum-labels"><span>LOW / RUMBLE</span><span>MID / VOICE</span><span>HIGH / DETAIL</span></div>
+      </article>
+
+      <article class="panel level-panel">
+        <div class="panel-heading"><div><p class="eyebrow">INPUT LEVEL</p><h3>Current amplitude</h3></div><span id="levelValue" class="level-value">-80.0 dBFS</span></div>
+        <div class="meter"><div id="meterFill" class="meter-fill"></div></div>
+        <div id="alertBanner" class="alert-banner normal">Waiting for microphone permission</div>
+        <label class="control-label" for="thresholdSlider">Alert threshold <span id="thresholdValue">-25 dBFS</span></label>
+        <input id="thresholdSlider" type="range" min="-60" max="0" value="-25" step="1">
+      </article>
+    </section>
+
+    <section class="analysis-grid">
+      <article class="panel classification-panel">
+        <div class="panel-heading"><div><p class="eyebrow">LIVE INTERPRETATION</p><h3>Likely sound profile</h3></div><span id="confidenceReadout" class="mono">-- confidence</span></div>
+        <div id="classification" class="classification-main"><span class="classification-icon">◌</span><div><strong>Microphone idle</strong><p>Start listening to analyze the incoming signal.</p></div></div>
+        <div class="score-list" id="scoreList"></div>
+      </article>
+
+      <article class="panel stats-panel">
+        <div class="panel-heading"><div><p class="eyebrow">SESSION</p><h3>At a glance</h3></div></div>
+        <div class="stats"><div><span id="eventCount">0</span><small>events</small></div><div><span id="alertCount">0</span><small>alerts</small></div><div><span id="dominantLabel">--</span><small>dominant profile</small></div></div>
+        <button id="exportButton" class="export-button" type="button">Download event log <span>↓</span></button>
+      </article>
+    </section>
+
+    <section class="panel log-panel">
+      <div class="panel-heading"><div><p class="eyebrow">EVENT LOG</p><h3>Signal moments</h3></div><span class="mono" id="logStatus">No events yet</span></div>
+      <div class="table-wrap"><table><thead><tr><th>TIME</th><th>PROFILE</th><th>CONFIDENCE</th><th>LEVEL</th><th>STATUS</th></tr></thead><tbody id="eventLog"><tr class="empty-row"><td colspan="5">Start listening to populate the event log.</td></tr></tbody></table></div>
+    </section>
+
+    <details class="how-it-works"><summary>How it works and limitations</summary><div class="details-copy"><p><strong>Browser-only DSP:</strong> your microphone is connected to an <code>AnalyserNode</code>. The app calculates RMS amplitude, dominant frequency, spectral centroid, and low/mid/high energy bands locally. Those features produce an interpretable sound profile such as speech-like, music-like, bass-heavy, or bright/noisy.</p><p>This is not a trained YAMNet model and cannot identify every AudioSet class. It is a lightweight signal-analysis baseline: microphone gain affects dBFS, overlapping sounds can confuse the heuristic, and no audio is uploaded or stored.</p></div></details>
+    <footer><span>SoundAnalysis / static runtime</span><span>Audio stays in your browser</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -3,28 +3,29 @@ title: Live Sound Classifier
 emoji: 🎙️
 colorFrom: blue
 colorTo: purple
-sdk: gradio
-sdk_version: "6.26.0"
-app_file: app.py
+sdk: static
+app_file: index.html
 pinned: false
 ---
 
 # Live Sound Classifier
 
-A browser app that listens to your **microphone**, classifies the sound in real time with
-**YAMNet** (Google's AudioSet-trained sound event model), and shows the result as a live
-confidence chart, an input-level alert banner, and a timestamped event log.
+A browser-only app that listens to your **microphone**, extracts frequency features locally
+with the Web Audio API, and shows a live sound profile, confidence bars, input-level alerts,
+and a timestamped event log. Because the Space uses the static SDK, it does not need a
+Python server or CPU Basic runtime.
 
 - **Live demo:** <https://huggingface.co/spaces/seahli/SoundAnalysis1>
 - **Source:** <https://github.com/seahli88-del/SoundAnalysis>
 
 ## What it doess
 
-1. Captures short microphone chunks in the browser via Gradio's streaming audio input.
-2. Resamples each chunk to 16 kHz mono and measures its level (dBFS).
-3. Runs [YAMNet](https://tfhub.dev/google/yamnet/1) to classify the chunk against 521
-   AudioSet sound classes (speech, music, animals, mechanical noise, alarms, …).
-4. Displays the top-5 predicted classes with confidence scores, the current input level,
+1. Captures microphone audio entirely in the browser with `getUserMedia`.
+2. Uses the Web Audio API to measure amplitude, dominant frequency, spectral centroid,
+  and low/mid/high frequency energy.
+3. Maps those features to interpretable sound profiles such as speech-like, music-like,
+  bass-heavy, bright/noisy, or quiet.
+4. Displays profile confidence scores, the current input level,
    and raises an alert banner when the level crosses a user-adjustable threshold.
 5. Logs notable events (level spikes or a change in the dominant sound) with timestamps,
    and lets you export the session log as a CSV.
@@ -34,8 +35,7 @@ known limitations.
 
 ## Data / model used
 
-- **Model:** YAMNet (`google/yamnet/1` on TensorFlow Hub) — pretrained, no fine-tuning.
-  Loaded lazily on first use so the app starts quickly and CI doesn't need to download it.
+- **Analysis:** browser-side DSP heuristics; there is no server-side model or inference.
 - **Data:** no audio is stored — chunks are classified in memory and discarded. Only the
   derived event log (timestamp, predicted label, confidence, level) is kept for the
   current browser session, and only if you click **Export**.
@@ -48,19 +48,18 @@ cd SoundAnalysis
 python -m venv .venv
 .venv\Scripts\activate        # Windows
 # source .venv/bin/activate   # macOS/Linux
-pip install -r requirements.txt
-python app.py
+python -m http.server 8000
 ```
 
-Then open the local URL Gradio prints (usually `http://127.0.0.1:7860`) and allow
-microphone access when prompted.
+For a local UI preview, run `python -m http.server 8000` in the project folder, then open
+`http://127.0.0.1:8000`. Allow microphone access when prompted. A static Space must be
+served over HTTPS for microphone permissions; the Hugging Face URL provides that.
 
 ## CI/CD
 
 `.github/workflows/deploy-huggingface.yml` runs on every push to `main`:
 
-1. **verify** — installs dependencies on a clean runner, checks required files exist,
-   compiles all Python files, imports `app.py`, and runs the unit tests in `tests/`.
+1. **verify** — checks the static entry files exist and runs the Python utility tests.
 2. **deploy** — if `verify` passes, force-pushes the repo to the Hugging Face Space using
    an `HF_TOKEN` repository secret (Settings → Secrets and variables → Actions).
 
