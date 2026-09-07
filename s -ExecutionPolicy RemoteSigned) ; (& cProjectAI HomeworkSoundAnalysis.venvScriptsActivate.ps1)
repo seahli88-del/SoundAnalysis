@@ -1,0 +1,95 @@
+[33mcommit 50e28c648afc9949514a45d4f4fea7d8f954f7eb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 14:29:55 2026 +0800
+
+    edit read me
+
+[33mcommit 235dc2e8ce8b83b8a5d0b960fec018e914448e2a[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 14:28:36 2026 +0800
+
+    edit readme
+
+[33mcommit 614807145e7a3f75555c77b51ee1f68ee6c995f2[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 14:24:26 2026 +0800
+
+    edit repo name
+
+[33mcommit 310340dc829d8e8d43394798e50eb745412ce80e[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 11:35:34 2026 +0800
+
+    edit app.py
+
+[33mcommit b9d4e9772a49366a5dff98d09ae8a406cd51db6a[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 11:22:57 2026 +0800
+
+    eidt requirement  txt
+
+[33mcommit 4287dc35c473e3cd814b127e46c8a3588ebf8a61[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 10:24:37 2026 +0800
+
+    ci: fail fast when HF_TOKEN secret is missing
+
+[33mcommit ad4205c1df3f9da449ac525f21107b383961c1d0[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 10:08:10 2026 +0800
+
+    chore: fill in GitHub repo and HF Space URLs
+
+[33mcommit f7e1e33dd8a3695e4576938b8c9b7afe4cc98127[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:59:06 2026 +0800
+
+    fix: load YAMNet via kagglehub (tfhub.dev HTTP resolver 403s post Kaggle migration)
+
+[33mcommit 26327ff484a33940fc56150f6988fecf5b64b753[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:46:36 2026 +0800
+
+    fix: pin gradio 6.26.0 + compatible huggingface_hub/pydantic (fixes ASGI 500s)
+
+[33mcommit 2bfbc689ecd898f96a79f8cdb87d9bfefd49a048[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:30 2026 +0800
+
+    docs: README with HF Space front matter, usage, and CI notes
+
+[33mcommit 133c4041531c4f523b759128a6d8da251751e4c6[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:30 2026 +0800
+
+    ci: verify + deploy-to-HF-Space GitHub Actions workflow
+
+[33mcommit 7317770ca4519713a104ba8cb752209aca4e3414[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:23 2026 +0800
+
+    feat: Gradio app with live mic streaming, alerts, event log, CSV export
+
+[33mcommit 5d56d3cfdcc851d0ee71caeb21e23ab01085885a[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:19 2026 +0800
+
+    test: add smoke tests for audio_utils
+
+[33mcommit 36fdd2b98c83dbd3fcf8fa0d78543df1746d25a4[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:14 2026 +0800
+
+    feat: YAMNet wrapper for sound event classification
+
+[33mcommit 4fa6f780bfda38093aec42a0d477478589c6a663[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:08 2026 +0800
+
+    feat: audio utils for mono conversion, resampling, and dBFS metering
+
+[33mcommit 7595b535a5a7fd97387e4f0771ed5d9d6d8806e3[m
+Author: seahli <seahli.en@flex.com>
+Date:   Wed Sep 2 09:42:01 2026 +0800
+
+    chore: scaffold project deps and gitignore

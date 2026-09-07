@@ -18,7 +18,7 @@ confidence chart, an input-level alert banner, and a timestamped event log.
 - **Live demo:** <https://huggingface.co/spaces/seahli/SoundAnalysis1>
 - **Source:** <https://github.com/seahli88-del/SoundAnalysis>
 
-## What it does
+## What it doess
 
 1. Captures short microphone chunks in the browser via Gradio's streaming audio input.
 2. Resamples each chunk to 16 kHz mono and measures its level (dBFS).
